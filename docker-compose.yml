@@ -1,0 +1,29 @@
+services:
+#  persons-backend:
+#    build:
+#      context: vary-backend
+#    restart: unless-stopped
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://main-db:5432/vary
+#      SPRING_DATASOURCE_USERNAME: admin
+#      SPRING_DATASOURCE_PASSWORD: admin
+#      SPRINGFOX_DOCUMENTATION_SWAGGER-UI_HOST-URL: localhost:81/api/v1
+#      SPRING_DOCUMENTATION_SWAGGER_V2_PATH: api/v1
+#    depends_on:
+#      - main-db
+
+  persons-db:
+    build:
+      context: db
+    restart: unless-stopped
+    ports:
+      - 5777:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: persons
+    volumes:
+      - main_db:/var/lib/postgresql
+
+volumes:
+  main_db:
